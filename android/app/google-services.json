@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "875335564560",
+    "project_id": "simplitor-99494",
+    "storage_bucket": "simplitor-99494.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:875335564560:android:150a1c48608087fb7cb995",
+        "android_client_info": {
+          "package_name": "com.simplitor.nasvex"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAvvLmNZiLX-ysZqC5RgEt9MgnkK3lPQLU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

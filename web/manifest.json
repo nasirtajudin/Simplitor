@@ -1,0 +1,11 @@
+{
+  "name": "Simplitor",
+  "short_name": "Simplitor",
+  "start_url": ".",
+  "display": "standalone",
+  "background_color": "#0D0A1A",
+  "theme_color": "#0D0A1A",
+  "description": "Organize your life, simplify your day.",
+  "orientation": "portrait-primary",
+  "prefer_related_applications": false
+}
