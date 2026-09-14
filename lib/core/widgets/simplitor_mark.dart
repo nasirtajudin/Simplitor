@@ -2,7 +2,7 @@ import 'dart:ui' as ui;
 
 import 'package:flutter/material.dart';
 
-import '../../theme/app_theme.dart';
+import 'package:simplitor/core/theme/app_theme.dart';
 
 /// The Simplitor "S" logo with a soft glow behind it.
 /// Set [pulse] to true for a gentle breathing animation.

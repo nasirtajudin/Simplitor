@@ -10,13 +10,15 @@ class FadeSlideIn extends StatelessWidget {
     required this.child,
     required this.animation,
     this.interval,
-    this.offset = const Offset(0, 18),
+    this.dy = 18.0,
   });
 
   final Widget child;
   final Animation<double> animation;
   final Interval? interval;
-  final Offset offset;
+
+  /// How far (in pixels) the child starts below its final position.
+  final double dy;
 
   @override
   Widget build(BuildContext context) {
@@ -29,7 +31,7 @@ class FadeSlideIn extends StatelessWidget {
         return Opacity(
           opacity: t,
           child: Transform.translate(
-            offset: Offset(offset.dx * (1 - t), offset.dy * (1 - t)),
+            offset: Offset(0, dy * (1 - t)),
             child: built,
           ),
         );
