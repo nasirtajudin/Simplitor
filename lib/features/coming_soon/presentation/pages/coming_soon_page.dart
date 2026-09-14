@@ -1,10 +1,10 @@
 import 'dart:math' as math;
-import 'dart:ui' as ui;
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../core/theme/app_theme.dart';
+import '../../../../core/widgets/ambient_glow.dart';
 import '../../../../core/widgets/fade_slide_in.dart';
 import '../../../../core/widgets/simplitor_mark.dart';
 import '../../../auth/data/auth_repository.dart';
@@ -22,17 +22,12 @@ class _ComingSoonPageState extends State<ComingSoonPage>
     with TickerProviderStateMixin {
   late final AnimationController _entrance = AnimationController(
     vsync: this,
-    duration: const Duration(milliseconds: 1100),
+    duration: const Duration(milliseconds: 1200),
   )..forward();
-
-  late final AnimationController _orbit = AnimationController(
-    vsync: this,
-    duration: const Duration(seconds: 7),
-  )..repeat();
 
   late final AnimationController _dots = AnimationController(
     vsync: this,
-    duration: const Duration(milliseconds: 1500),
+    duration: const Duration(milliseconds: 1400),
   )..repeat();
 
   bool _isSigningOut = false;
@@ -49,7 +44,6 @@ class _ComingSoonPageState extends State<ComingSoonPage>
   @override
   void dispose() {
     _entrance.dispose();
-    _orbit.dispose();
     _dots.dispose();
     super.dispose();
   }
@@ -68,91 +62,94 @@ class _ComingSoonPageState extends State<ComingSoonPage>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Container(
-        decoration: const BoxDecoration(
-          gradient: LinearGradient(
-            begin: Alignment.topCenter,
-            end: Alignment.bottomCenter,
-            colors: <Color>[Color(0xFF181138), AppColors.background],
-          ),
-        ),
-        child: SafeArea(
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 28),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: <Widget>[
-                const SizedBox(height: 22),
-                FadeSlideIn(
-                  animation: _entrance,
-                  interval: const Interval(0.0, 0.4),
-                  child: _Header(
-                    firstName: _firstName,
-                    email: _email,
-                    photoUrl: _photoUrl,
-                  ),
-                ),
-                const Spacer(flex: 3),
-                FadeSlideIn(
-                  animation: _entrance,
-                  interval: const Interval(0.08, 0.5),
-                  dy: 12,
-                  child: _OrbitIllustration(controller: _orbit),
-                ),
-                const SizedBox(height: 30),
-                FadeSlideIn(
-                  animation: _entrance,
-                  interval: const Interval(0.18, 0.58),
-                  child: const _ComingSoonBadge(),
-                ),
-                const SizedBox(height: 18),
-                FadeSlideIn(
-                  animation: _entrance,
-                  interval: const Interval(0.26, 0.66),
-                  child: const Text(
-                    'Something great is\nalmost here',
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                      fontSize: 26,
-                      fontWeight: FontWeight.w700,
-                      letterSpacing: -0.3,
-                      height: 1.25,
-                      color: AppColors.textPrimary,
+      body: Stack(
+        children: <Widget>[
+          const Positioned.fill(child: AmbientGlow()),
+          Positioned.fill(
+            child: SafeArea(
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 28),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: <Widget>[
+                    const SizedBox(height: 22),
+                    FadeSlideIn(
+                      animation: _entrance,
+                      interval: const Interval(0.0, 0.4),
+                      child: _Header(
+                        firstName: _firstName,
+                        email: _email,
+                        photoUrl: _photoUrl,
+                      ),
                     ),
-                  ),
-                ),
-                const SizedBox(height: 14),
-                FadeSlideIn(
-                  animation: _entrance,
-                  interval: const Interval(0.34, 0.74),
-                  child: const Text(
-                    'We are putting the finishing touches on Simplitor. '
-                    'Your organized life is just around the corner.',
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                      fontSize: 15,
-                      height: 1.6,
-                      color: AppColors.textSecondary,
+                    const Spacer(flex: 3),
+                    FadeSlideIn(
+                      animation: _entrance,
+                      interval: const Interval(0.06, 0.5),
+                      dy: 14,
+                      child: const Center(
+                        child: SimplitorMark(size: 168, pulse: true),
+                      ),
                     ),
-                  ),
+                    const SizedBox(height: 34),
+                    FadeSlideIn(
+                      animation: _entrance,
+                      interval: const Interval(0.16, 0.56),
+                      child: const _ComingSoonBadge(),
+                    ),
+                    const SizedBox(height: 18),
+                    FadeSlideIn(
+                      animation: _entrance,
+                      interval: const Interval(0.24, 0.64),
+                      child: const Text(
+                        'Something great is\nalmost here',
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                          fontSize: 26,
+                          fontWeight: FontWeight.w700,
+                          letterSpacing: -0.3,
+                          height: 1.25,
+                          color: AppColors.textPrimary,
+                        ),
+                      ),
+                    ),
+                    const SizedBox(height: 14),
+                    FadeSlideIn(
+                      animation: _entrance,
+                      interval: const Interval(0.32, 0.72),
+                      child: const Text(
+                        'We are putting the finishing touches on Simplitor. '
+                        'Your organized life is just around the corner.',
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                          fontSize: 15,
+                          height: 1.6,
+                          color: AppColors.textSecondary,
+                        ),
+                      ),
+                    ),
+                    const SizedBox(height: 26),
+                    FadeSlideIn(
+                      animation: _entrance,
+                      interval: const Interval(0.40, 0.80),
+                      child: _PulsingDots(controller: _dots),
+                    ),
+                    const Spacer(flex: 4),
+                    FadeSlideIn(
+                      animation: _entrance,
+                      interval: const Interval(0.48, 0.88),
+                      child: _SignOutButton(
+                        onTap: _signOut,
+                        busy: _isSigningOut,
+                      ),
+                    ),
+                    const SizedBox(height: 12),
+                  ],
                 ),
-                const SizedBox(height: 28),
-                FadeSlideIn(
-                  animation: _entrance,
-                  interval: const Interval(0.42, 0.82),
-                  child: _PulsingDots(controller: _dots),
-                ),
-                const Spacer(flex: 4),
-                FadeSlideIn(
-                  animation: _entrance,
-                  interval: const Interval(0.50, 0.90),
-                  child: _SignOutButton(onTap: _signOut),
-                ),
-                const SizedBox(height: 12),
-              ],
+              ),
             ),
           ),
-        ),
+        ],
       ),
     );
   }
@@ -210,7 +207,7 @@ class _Avatar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final String initial = name.isNotEmpty ? name[0].toUpperCase() : '?';
-    Widget fallback = Center(
+    final Widget fallback = Center(
       child: Text(
         initial,
         style: const TextStyle(
@@ -295,98 +292,6 @@ class _ComingSoonBadge extends StatelessWidget {
   }
 }
 
-class _OrbitIllustration extends StatelessWidget {
-  const _OrbitIllustration({required this.controller});
-
-  final AnimationController controller;
-
-  @override
-  Widget build(BuildContext context) {
-    return SizedBox(
-      width: 180,
-      height: 180,
-      child: AnimatedBuilder(
-        animation: controller,
-        builder: (BuildContext context, Widget? child) {
-          return CustomPaint(
-            painter: _OrbitPainter(progress: controller.value),
-            child: child,
-          );
-        },
-        child: const Center(child: SimplitorMark(size: 42)),
-      ),
-    );
-  }
-}
-
-class _OrbitPainter extends CustomPainter {
-  _OrbitPainter({required this.progress});
-
-  final double progress;
-
-  @override
-  void paint(Canvas canvas, Size size) {
-    final Offset center = Offset(size.width / 2, size.height / 2);
-    final double radius = size.width * 0.42;
-    final double rotation = progress * 2 * math.pi;
-
-    // Soft glow.
-    final Paint glow = Paint()
-      ..shader = ui.Gradient.radial(
-        center,
-        radius * 1.15,
-        <Color>[
-          AppColors.accent.withOpacity(0.16),
-          AppColors.accent.withOpacity(0),
-        ],
-      );
-    canvas.drawCircle(center, radius * 1.15, glow);
-
-    // Base ring.
-    canvas.drawCircle(
-      center,
-      radius,
-      Paint()
-        ..style = PaintingStyle.stroke
-        ..strokeWidth = 2
-        ..color = const Color(0x338B5CF6),
-    );
-
-    // Rotating comet arc.
-    canvas.save();
-    canvas.translate(center.dx, center.dy);
-    canvas.rotate(rotation);
-    final Rect arcRect = Rect.fromCircle(center: Offset.zero, radius: radius);
-    final Paint comet = Paint()
-      ..style = PaintingStyle.stroke
-      ..strokeWidth = 3.5
-      ..strokeCap = StrokeCap.round
-      ..shader = ui.Gradient.sweep(
-        Offset.zero,
-        <Color>[
-          AppColors.accentSoft,
-          AppColors.accent,
-          AppColors.accent.withOpacity(0),
-        ],
-        <double>[0.0, 0.55, 1.0],
-      );
-    canvas.drawArc(arcRect, -math.pi / 2, math.pi * 1.75, false, comet);
-    canvas.restore();
-
-    // Glowing satellite dot.
-    final Offset dot = Offset(
-      center.dx + radius * math.cos(rotation - math.pi / 2),
-      center.dy + radius * math.sin(rotation - math.pi / 2),
-    );
-    canvas.drawCircle(
-        dot, 8, Paint()..color = AppColors.accentSoft.withOpacity(0.25));
-    canvas.drawCircle(dot, 4, Paint()..color = AppColors.accentSoft);
-  }
-
-  @override
-  bool shouldRepaint(covariant _OrbitPainter oldDelegate) => true;
-}
-
 class _PulsingDots extends StatelessWidget {
   const _PulsingDots({required this.controller});
 
@@ -419,16 +324,23 @@ class _PulsingDots extends StatelessWidget {
 }
 
 class _SignOutButton extends StatelessWidget {
-  const _SignOutButton({required this.onTap});
+  const _SignOutButton({required this.onTap, required this.busy});
 
   final VoidCallback onTap;
+  final bool busy;
 
   @override
   Widget build(BuildContext context) {
     return Center(
       child: TextButton.icon(
-        onPressed: onTap,
-        icon: const Icon(Icons.logout_rounded, size: 17),
+        onPressed: busy ? null : onTap,
+        icon: busy
+            ? const SizedBox(
+                width: 14,
+                height: 14,
+                child: CircularProgressIndicator(strokeWidth: 2),
+              )
+            : const Icon(Icons.logout_rounded, size: 17),
         label: const Text('Sign out'),
         style: TextButton.styleFrom(
           foregroundColor: AppColors.textSecondary,

@@ -3,20 +3,26 @@ import 'package:flutter/material.dart';
 class AppColors {
   AppColors._();
 
-  static const Color background = Color(0xFF0D0A1A);
-  static const Color backgroundAlt = Color(0xFF181036);
-  static const Color surface = Color(0xFF211A45);
-  static const Color surfaceHigh = Color(0xFF2B2260);
+  // Base surfaces — deep space navy.
+  static const Color background = Color(0xFF070A14);
+  static const Color backgroundAlt = Color(0xFF101830);
+  static const Color surface = Color(0xFF17203B);
+  static const Color surfaceHigh = Color(0xFF212D52);
 
-  static const Color accent = Color(0xFF8B5CF6);
-  static const Color accentSoft = Color(0xFFC0A6FF);
-  static const Color accentDeep = Color(0xFF5B3FE0);
+  // Brand — electric blue and silver.
+  static const Color accent = Color(0xFF4D9FFF);
+  static const Color accentSoft = Color(0xFF9CC8FF);
+  static const Color accentDeep = Color(0xFF2A5BD7);
+  static const Color silver = Color(0xFFE9EFF9);
 
-  static const Color textPrimary = Color(0xFFF6F4FF);
-  static const Color textSecondary = Color(0xFFA79FD1);
+  // Text.
+  static const Color textPrimary = Color(0xFFF2F6FD);
+  static const Color textSecondary = Color(0xFF97A2BE);
 
-  static const Color onLightSurface = Color(0xFF1E1B33);
-  static const Color error = Color(0xFFFF7A93);
+  // On the white Google button.
+  static const Color onLightSurface = Color(0xFF16203A);
+
+  static const Color error = Color(0xFFFF7590);
 }
 
 class AppTheme {

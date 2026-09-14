@@ -1,10 +1,38 @@
 <vector xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:aapt="http://schemas.android.com/aapt"
     android:width="108dp"
     android:height="108dp"
     android:viewportWidth="108"
     android:viewportHeight="108">
+
+    <!-- Blue glow behind the S -->
     <path
-        android:fillColor="#FFFFFFFF"
-        android:fillType="evenOdd"
-        android:pathData="M32,54 a22,22 0 1,0 44,0 a22,22 0 1,0 -44,0z M42,54 a12,12 0 1,0 24,0 a12,12 0 1,0 -24,0z M49,54 a5,5 0 1,0 10,0 a5,5 0 1,0 -10,0z"/>
+        android:pathData="M64.6,32.5 C64.6,24.5 43.2,24.5 43.2,34.7 C43.2,45.9 64.6,45.9 64.6,54.6 C64.6,65.7 43.2,65.7 43.2,75.4"
+        android:strokeColor="#5CA8FF"
+        android:strokeWidth="15"
+        android:strokeAlpha="0.45"
+        android:strokeLineCap="round"
+        android:strokeLineJoin="round"
+        android:fillColor="#00000000"/>
+
+    <!-- Metallic silver S -->
+    <path
+        android:pathData="M64.6,32.5 C64.6,24.5 43.2,24.5 43.2,34.7 C43.2,45.9 64.6,45.9 64.6,54.6 C64.6,65.7 43.2,65.7 43.2,75.4"
+        android:strokeWidth="9.5"
+        android:strokeLineCap="round"
+        android:strokeLineJoin="round"
+        android:fillColor="#00000000">
+        <aapt:attr name="android:strokeColor">
+            <gradient
+                android:startX="54"
+                android:startY="26"
+                android:endX="54"
+                android:endY="78"
+                android:type="linear">
+                <item android:offset="0.0" android:color="#FFF6F9FF"/>
+                <item android:offset="0.55" android:color="#FFDCE6F5"/>
+                <item android:offset="1.0" android:color="#FF9FC1F2"/>
+            </gradient>
+        </aapt:attr>
+    </path>
 </vector>
