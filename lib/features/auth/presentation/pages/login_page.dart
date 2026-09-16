@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart' show User;
 import 'package:flutter/material.dart';
 
 import '../../../../core/theme/app_theme.dart';
+import '../../../../core/utils/open_link.dart';
 import '../../../../core/widgets/ambient_glow.dart';
 import '../../../../core/widgets/fade_slide_in.dart';
 import '../../../../core/widgets/simplitor_mark.dart';
@@ -48,7 +49,7 @@ class _LoginPageState extends State<LoginPage>
         // The user closed the Google account picker — reset quietly.
         setState(() => _isSigningIn = false);
       }
-      // On success the AuthGate in app.dart swaps to the Coming Soon page.
+      // On success the AuthGate in app.dart takes over.
     } on AuthFailure catch (failure) {
       if (!mounted) return;
       setState(() {
@@ -85,50 +86,89 @@ class _LoginPageState extends State<LoginPage>
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: <Widget>[
-                    const Spacer(flex: 5),
+                    const Spacer(flex: 4),
                     FadeSlideIn(
                       animation: _entrance,
-                      interval: const Interval(0.0, 0.4),
+                      interval: const Interval(0.0, 0.38),
                       dy: 10,
                       child: const Center(
-                        child: SimplitorMark(size: 136, pulse: true),
+                        child: SimplitorMark(size: 104, pulse: true),
                       ),
                     ),
-                    const SizedBox(height: 30),
+                    const SizedBox(height: 20),
                     FadeSlideIn(
                       animation: _entrance,
-                      interval: const Interval(0.08, 0.48),
+                      interval: const Interval(0.06, 0.44),
                       child: const Text(
                         'Simplitor',
                         textAlign: TextAlign.center,
                         style: TextStyle(
-                          fontSize: 34,
+                          fontSize: 32,
                           fontWeight: FontWeight.w700,
-                          letterSpacing: 1.2,
+                          letterSpacing: 1.4,
                           color: AppColors.textPrimary,
                         ),
                       ),
                     ),
-                    const SizedBox(height: 12),
+                    const SizedBox(height: 8),
                     FadeSlideIn(
                       animation: _entrance,
-                      interval: const Interval(0.16, 0.56),
-                      dy: 12,
+                      interval: const Interval(0.12, 0.50),
                       child: const Text(
-                        'Organize your life,\nsimplify your day.',
+                        'Simplify. Organize. Achieve.',
                         textAlign: TextAlign.center,
                         style: TextStyle(
-                          fontSize: 16,
-                          height: 1.55,
-                          letterSpacing: 0.2,
-                          color: AppColors.textSecondary,
+                          fontSize: 13,
+                          fontWeight: FontWeight.w600,
+                          letterSpacing: 1.2,
+                          color: AppColors.accentSoft,
                         ),
                       ),
                     ),
-                    const Spacer(flex: 6),
+                    const Spacer(flex: 5),
                     FadeSlideIn(
                       animation: _entrance,
-                      interval: const Interval(0.28, 0.68),
+                      interval: const Interval(0.20, 0.58),
+                      dy: 12,
+                      child: Column(
+                        children: const <Widget>[
+                          Text(
+                            'Welcome back',
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                              fontSize: 14.5,
+                              fontWeight: FontWeight.w500,
+                              color: AppColors.textSecondary,
+                            ),
+                          ),
+                          SizedBox(height: 8),
+                          Text(
+                            "Let's get you in",
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                              fontSize: 27,
+                              fontWeight: FontWeight.w700,
+                              letterSpacing: -0.3,
+                              color: AppColors.textPrimary,
+                            ),
+                          ),
+                          SizedBox(height: 10),
+                          Text(
+                            'Access your workspace with your Google account',
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                              fontSize: 14,
+                              height: 1.5,
+                              color: AppColors.textSecondary,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    const Spacer(flex: 2),
+                    FadeSlideIn(
+                      animation: _entrance,
+                      interval: const Interval(0.28, 0.66),
                       dy: 22,
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -144,21 +184,43 @@ class _LoginPageState extends State<LoginPage>
                         ],
                       ),
                     ),
-                    const SizedBox(height: 22),
+                    const SizedBox(height: 20),
                     FadeSlideIn(
                       animation: _entrance,
-                      interval: const Interval(0.40, 0.80),
-                      child: const Text(
-                        'By continuing, you agree to our Terms of Service\nand acknowledge our Privacy Policy.',
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                          fontSize: 12,
-                          height: 1.5,
-                          color: AppColors.textSecondary,
-                        ),
+                      interval: const Interval(0.38, 0.76),
+                      child: Wrap(
+                        alignment: WrapAlignment.center,
+                        children: <Widget>[
+                          const Text(
+                            'By continuing, you agree to our ',
+                            style: TextStyle(
+                                fontSize: 12,
+                                color: AppColors.textSecondary),
+                          ),
+                          _LinkText(
+                            label: 'Terms of Service',
+                            onTap: () => openExternalLink('https://google.com'),
+                          ),
+                          const Text(
+                            ' & ',
+                            style: TextStyle(
+                                fontSize: 12,
+                                color: AppColors.textSecondary),
+                          ),
+                          _LinkText(
+                            label: 'Privacy Policy',
+                            onTap: () => openExternalLink('https://google.com'),
+                          ),
+                          const Text(
+                            '.',
+                            style: TextStyle(
+                                fontSize: 12,
+                                color: AppColors.textSecondary),
+                          ),
+                        ],
                       ),
                     ),
-                    const SizedBox(height: 8),
+                    const SizedBox(height: 12),
                   ],
                 ),
               ),
@@ -170,8 +232,6 @@ class _LoginPageState extends State<LoginPage>
   }
 }
 
-/// Animated inline error box — appears with a size transition,
-/// never shows raw exception text.
 class _ErrorBox extends StatelessWidget {
   const _ErrorBox({required this.message});
 
@@ -186,12 +246,13 @@ class _ErrorBox extends StatelessWidget {
       child: message == null
           ? const SizedBox(width: double.infinity)
           : Container(
-              padding:
-                  const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+              padding: const EdgeInsets.symmetric(
+                  horizontal: 16, vertical: 12),
               decoration: BoxDecoration(
                 color: AppColors.error.withOpacity(0.10),
                 borderRadius: BorderRadius.circular(14),
-                border: Border.all(color: AppColors.error.withOpacity(0.35)),
+                border:
+                    Border.all(color: AppColors.error.withOpacity(0.35)),
               ),
               child: Row(
                 children: <Widget>[
@@ -202,12 +263,38 @@ class _ErrorBox extends StatelessWidget {
                     child: Text(
                       message!,
                       style: const TextStyle(
-                          fontSize: 13, height: 1.45, color: AppColors.error),
+                          fontSize: 13,
+                          height: 1.45,
+                          color: AppColors.error),
                     ),
                   ),
                 ],
               ),
             ),
+    );
+  }
+}
+
+class _LinkText extends StatelessWidget {
+  const _LinkText({required this.label, required this.onTap});
+
+  final String label;
+  final VoidCallback onTap;
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: onTap,
+      child: Text(
+        label,
+        style: TextStyle(
+          fontSize: 12,
+          fontWeight: FontWeight.w600,
+          color: AppColors.accentSoft,
+          decoration: TextDecoration.underline,
+          decorationColor: AppColors.accentSoft.withOpacity(0.4),
+        ),
+      ),
     );
   }
 }
