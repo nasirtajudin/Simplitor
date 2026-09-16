@@ -34,8 +34,9 @@ Future<String?> showUniversityPickerSheet(BuildContext context,
       return FadeTransition(
         opacity: curved,
         child: SlideTransition(
-          position: Tween<Offset>(begin: const Offset(0, 0.05), end: Offset.zero)
-              .animate(curved),
+          position:
+              Tween<Offset>(begin: const Offset(0, 0.05), end: Offset.zero)
+                  .animate(curved),
           child: child,
         ),
       );
@@ -93,8 +94,8 @@ class _UniversityPickerSheetState extends State<_UniversityPickerSheet> {
                   height: screen.height * 0.82,
                   decoration: BoxDecoration(
                     color: AppColors.backgroundAlt,
-                    borderRadius:
-                        const BorderRadius.vertical(top: Radius.circular(26)),
+                    borderRadius: const BorderRadius.vertical(
+                        top: Radius.circular(26)),
                     border: Border(
                       top: BorderSide(
                           color: Colors.white.withOpacity(0.10), width: 1),
@@ -131,8 +132,8 @@ class _UniversityPickerSheetState extends State<_UniversityPickerSheet> {
                           decoration: InputDecoration(
                             hintText: 'Search universities…',
                             hintStyle: TextStyle(
-                              color:
-                                  AppColors.textSecondary.withOpacity(0.7),
+                              color: AppColors.textSecondary
+                                  .withOpacity(0.7),
                               fontSize: 14.5,
                             ),
                             prefixIcon: const Icon(Icons.search_rounded,
@@ -149,7 +150,7 @@ class _UniversityPickerSheetState extends State<_UniversityPickerSheet> {
                             ),
                             focusedBorder: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(14),
-                              const BorderSide(
+                              borderSide: const BorderSide(
                                   color: AppColors.accent, width: 1.6),
                             ),
                           ),
@@ -219,8 +220,9 @@ class _UniversityTile extends StatelessWidget {
         margin: const EdgeInsets.only(bottom: 8),
         padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 13),
         decoration: BoxDecoration(
-          color:
-              selected ? AppColors.accent.withOpacity(0.14) : AppColors.surface,
+          color: selected
+              ? AppColors.accent.withOpacity(0.14)
+              : AppColors.surface,
           borderRadius: BorderRadius.circular(14),
           border: Border.all(
             color: selected

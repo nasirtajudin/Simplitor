@@ -255,9 +255,11 @@ class _EducationTypeToggle extends StatelessWidget {
                   width: thumbWidth,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(12),
-                    const LinearGradient(
-                            colors: <Color>[AppColors.accentDeep, AppColors.accent])
-                        as BoxDecoration,
+                    gradient: const LinearGradient(
+                      begin: Alignment.centerLeft,
+                      end: Alignment.centerRight,
+                      colors: <Color>[AppColors.accentDeep, AppColors.accent],
+                    ),
                   ),
                 ),
               ),
@@ -307,7 +309,8 @@ class _EducationTypeToggle extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           children: <Widget>[
             Icon(icon,
-                size: 17, color: selected ? Colors.white : AppColors.textSecondary),
+                size: 17,
+                color: selected ? Colors.white : AppColors.textSecondary),
             const SizedBox(width: 8),
             Text(
               label,

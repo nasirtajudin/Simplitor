@@ -171,10 +171,9 @@ class _OnboardingPageState extends State<OnboardingPage> {
                     width: constraints.maxWidth * (_step + 1) / 3,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(999),
-                      const LinearGradient(colors: <Color>[
-                        AppColors.accentDeep,
-                        AppColors.accent
-                      ]) as BoxDecoration,
+                      gradient: const LinearGradient(
+                        colors: <Color>[AppColors.accentDeep, AppColors.accent],
+                      ),
                     ),
                   );
                 },
