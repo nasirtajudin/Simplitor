@@ -65,7 +65,7 @@ class _AuthGate extends StatelessWidget {
 /// After sign-in, checks Firestore: existing profile → Coming Soon,
 /// no profile → onboarding (new members only).
 class _ProfileGate extends StatefulWidget {
-  const _ProfileGate({required this.user});
+  const _ProfileGate({super.key, required this.user});
 
   final User user;
 
